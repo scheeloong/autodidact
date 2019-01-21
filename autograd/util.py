@@ -5,11 +5,15 @@ def subvals(x, ivs):
     return tuple(x_)
 
 def subval(x, i, v):
-    x_ = list(x)
-    x_[i] = v
+    x_ = list(x) # A list of all x
+    x_[i] = v # x[i] to given value
+    # Return the list as a tuple. 
     return tuple(x_)
 
 def toposort(end_node):
+    '''
+    Topological sort
+    '''
     child_counts = {}
     stack = [end_node]
     while stack:
@@ -31,6 +35,8 @@ def toposort(end_node):
                 child_counts[parent] -= 1
 
 def wraps(fun, namestr="{fun}", docstr="{doc}", **kwargs):
+    '''
+    '''
     def _wraps(f):
         try:
             f.__name__ = namestr.format(fun=get_name(fun), **kwargs)
@@ -40,6 +46,8 @@ def wraps(fun, namestr="{fun}", docstr="{doc}", **kwargs):
     return _wraps
 
 def wrap_nary_f(fun, op, argnum):
+    '''
+    '''
     namestr = "{op}_of_{fun}_wrt_argnum_{argnum}"
     docstr = """\
     {op} of function {fun} with respect to argument number {argnum}. Takes the

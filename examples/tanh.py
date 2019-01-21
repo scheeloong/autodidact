@@ -7,7 +7,11 @@ from autograd import grad
 def tanh(x):
     return (1.0 - np.exp(-x))  / (1.0 + np.exp(-x))
 
-x = np.linspace(-7, 7, 200)
+#x = np.linspace(-7, 7, 200)
+x = np.linspace(-1, 1, 10)
+print("running grad")
+grad(tanh)(x)
+'''
 plt.plot(x, tanh(x),
          x, grad(tanh)(x),                                # first  derivative
          x, grad(grad(tanh))(x),                          # second derivative
@@ -19,3 +23,4 @@ plt.plot(x, tanh(x),
 plt.axis('off')
 plt.savefig("tanh.png")
 plt.show()
+'''

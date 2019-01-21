@@ -4,9 +4,14 @@ from contextlib import contextmanager
 from .util import subvals, wraps
 
 def trace(start_node, fun, x):
+    '''
+    '''
     with trace_stack.new_trace() as trace_id:
+        # Box the method first
         start_box = new_box(x, trace_id, start_node)
+        # Now close the box
         end_box = fun(start_box)
+        # 
         if isbox(end_box) and end_box._trace_id == start_box._trace_id:
             return end_box._value, end_box._node
         else:
@@ -24,6 +29,9 @@ class Node(object):
 
     @classmethod
     def new_root(cls, *args, **kwargs):
+        '''
+        Class method means you can call without instantiating an object
+        '''
         root = cls.__new__(cls)
         root.initialize_root(*args, **kwargs)
         return root
